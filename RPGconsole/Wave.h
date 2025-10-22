@@ -15,30 +15,28 @@ public:
     ~Wave() = default;
     void AddEnemy(Enemy enemy) {
         _enemyList.push_back(std::make_unique<Enemy>(enemy));
-        std::cout << "add" << std::endl;
     }
 
     void DisplayWave() {
         for (int i = 0; i < _enemyList.size(); i++) {
-            std::cout << "Enemy n°" << i+1 << " ";
-            const std::unique_ptr<Enemy> tempo = _enemyList[i];
-            tempo->Display();
+            std::cout << "Enemy " << i+1 << " ";
+            _enemyList[i]->Display();
         }
     }
 
-    Enemy GetTarget(){
+    void TakeDamage(int damage){
         for(int i = 0; i < _enemyList.size(); i++) {
-            if (!_enemyList[i].get()->IsDead()) {
-                return *_enemyList[i];
+            if (!_enemyList[i]->IsDead()) {
+                _enemyList[i]->TakeDamage(damage);
+                return ;
             }
         }
-        return *_enemyList[_enemyList.size() - 1];
     }
 
     [[nodiscard]] int GetWavePower() {
         int wavePower = 0;
         for(int i = 0; i < _enemyList.size(); i++) {
-            wavePower += _enemyList[i].get()->GetPower();
+            wavePower += _enemyList[i]->GetPower();
         }
         return wavePower;
     }

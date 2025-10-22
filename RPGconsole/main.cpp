@@ -21,19 +21,17 @@ int main() {
     Player player = Player(name, 100, 2, 1);
     player.Display();
     //
-    std::shared_ptr<Enemy> gob;
-    *gob= Enemy("gobelin", 10 , 5, 0);
-    std::shared_ptr<Enemy> orc;
-    *orc = Enemy("Orc", 50 , 10, 0);
+    std::shared_ptr<Enemy> gob = std::make_shared<Enemy>("gobelin", 10 , 5, 0);
+    std::shared_ptr<Enemy> orc= std::make_shared<Enemy>("Orc", 50 , 10, 0);
     Wave<Enemy> wave = Wave<Enemy>();
     wave.AddEnemy(*gob);
     wave.AddEnemy(*orc);
     wave.DisplayWave();
-    while (!wave.IsCompleted()) {
+    while (!wave.IsCompleted() || !player.IsDead()) {
         std::cout << "[[1] attack]" << std::endl;
         std:: cin >> input;
         if (input == "1") {
-            wave.GetTarget().TakeDamage(player.GetPower());
+            wave.TakeDamage(player.GetPower());
             player.TakeDamage(wave.GetWavePower());
             player.Display();
             wave.DisplayWave();
@@ -44,5 +42,6 @@ int main() {
             std:: cin >> input;
         }
     }
+
 }
     // TIP See CLion help at <a href="https://www.jetbrains.com/help/clion/">jetbrains.com/help/clion/</a>. Also, you can try interactive lessons for CLion by selecting 'Help | Learn IDE Features' from the main menu.
