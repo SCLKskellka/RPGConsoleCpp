@@ -3,8 +3,10 @@
 //
 
 #include "Character.h"
-
+#include "Player.h"
 #include <utility>
+
+
 Character::Character(std::string characterName,const int hPMax, const int power, const int armor) {
     _characterName = std::move(characterName);
     _characterHPMax = hPMax;
@@ -27,15 +29,21 @@ void Character::Attack(Character target) const {
     target.TakeDamage(_power);
 }
 
-
-void Character::TakeDamage(const int Damage) {
-    _characterHP -= Damage;
+void Character::TakeDamage(int damage) {
+    damage -= _armor;
+    _characterHP -= damage;
     if (_characterHP <= 0) {
         _isDead = true;
     }
 }
+
+void Character::Healing(int healAmount) {
+    _characterHP += healAmount;
+}
+
 bool Character::IsDead() const {
     return _isDead;
 }
+
 int Character::GetPower() const {return _power;}
 

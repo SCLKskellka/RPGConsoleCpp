@@ -3,8 +3,8 @@
 //
 
 #pragma once
+#include <memory>
 #include <vector>
-
 #include "Enemy.h"
 
 template<typename T>
@@ -24,11 +24,13 @@ public:
         }
     }
 
-    void TakeDamage(int damage){
-        for(int i = 0; i < _enemyList.size(); i++) {
-            if (!_enemyList[i]->IsDead()) {
-                _enemyList[i]->TakeDamage(damage);
-                return ;
+    void WTakeDamage(int damage,  const std::shared_ptr<Character> &character){
+        if(!_enemyList.empty()) {
+            for (int i = 0; i < _enemyList.size(); i++) {
+                if (!_enemyList[i]->IsDead()) {
+                    _enemyList[i]->TakeDamage(damage, character);
+                    return;
+                }
             }
         }
     }
@@ -36,18 +38,19 @@ public:
     [[nodiscard]] int GetWavePower() {
         int wavePower = 0;
         for(int i = 0; i < _enemyList.size(); i++) {
-            wavePower += _enemyList[i]->GetPower();
+            if (!_enemyList[i]->IsDead()) wavePower += _enemyList[i]->GetPower();
         }
         return wavePower;
     }
 
     [[nodiscard]] bool IsCompleted() {
-        for(int i = 0; i < _enemyList.size(); i++) {
-            if (!_enemyList[i].get()->IsDead()) {
+        if (_enemyList.empty())return false;
+        for (int i = 0; i < _enemyList.size(); i++) {
+            if (!_enemyList[i]->IsDead()) {
                 return false;
             }
         }
-        return true;
+        return true ;
     }
-    std::vector<std::unique_ptr<T>> _enemyList;
+    std::vector<std::shared_ptr<T>> _enemyList;
 };

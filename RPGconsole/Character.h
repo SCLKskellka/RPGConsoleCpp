@@ -4,26 +4,29 @@
 
 #pragma once
 #include <iostream>
-#include <memory>
 
+#include "Player.h"
 
 class Character {
-    public:
+public:
     Character(std::string characterName, int hPMax, int power, int armor);
-
     virtual ~Character();
-
     void Display();
-    void TakeDamage(int Damage);
+    void TakeDamage(int damage);
+    void Healing(int healAmount);
     void Attack(Character target) const;
     [[nodiscard]] bool IsDead() const;
     [[nodiscard]] int GetPower() const;
 
-    protected:
+protected:
     std::string _characterName;
     int _characterHP;
     int _characterHPMax;
     int _power;
     int _armor;
     bool _isDead = false;
+    int _xp = 0;
+    int _lvl = 1;
+    int _maxXP;
+
 };

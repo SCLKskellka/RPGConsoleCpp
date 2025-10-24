@@ -11,4 +11,12 @@ add_executable(RPGconsole main.cpp
         Enemy.cpp
         Enemy.h
         Wave.h
+        Game.cpp
+        Game.h
+        Item.cpp
+        Item.h
+        Inventory.cpp
+        Inventory.h
+        Potion.cpp
+        Potion.h
 )
