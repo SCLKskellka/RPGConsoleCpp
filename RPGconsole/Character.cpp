@@ -47,3 +47,14 @@ bool Character::IsDead() const {
 
 int Character::GetPower() const {return _power;}
 
+void Character::Growth(int growAmount) {
+    _xp += growAmount;
+    while (_xp >= _maxXP){
+        _lvl += 1;
+        _power += 2;
+        _characterHPMax += 50;
+        _characterHP += 50;
+        _xp-=_maxXP;
+    }
+}
+

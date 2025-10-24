@@ -3,15 +3,19 @@
 //
 
 #pragma once
-#include <memory>
 
+#include <memory>
 #include "Character.h"
+#include "Player.h"
 
 
 class Enemy:public Character{
     public:
-    Enemy(const std::string &characterName, int hPMax, int power, int armor);
+    Enemy(const std::string &characterName, int hPMax, int power, int armor, int growValue);
     ~Enemy() override;
-    void TakeDamage(int &damage);
-
+    void TakeDamageFromPlayer(int &damage, Player &player);
+    void SetGrowValue(int &growValue);
+    int GetGrowValue() const;
+    private:
+    int _growValue;
 };

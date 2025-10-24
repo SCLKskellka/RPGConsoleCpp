@@ -24,11 +24,11 @@ public:
         }
     }
 
-    void WTakeDamage(int damage){
+    void WTakeDamageFromPlayer(int damage, Player &player){
         if(!_enemyList.empty()) {
             for (int i = 0; i < _enemyList.size(); i++) {
                 if (!_enemyList[i]->IsDead()) {
-                    _enemyList[i]->TakeDamage(damage);
+                    _enemyList[i]->TakeDamageFromPlayer(damage,player);
                     return;
                 }
             }

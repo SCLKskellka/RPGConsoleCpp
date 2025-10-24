@@ -15,6 +15,7 @@ public:
     void Attack(Character target) const;
     [[nodiscard]] bool IsDead() const;
     [[nodiscard]] int GetPower() const;
+    void Growth(int growAmount);
 
 protected:
     std::string _characterName;

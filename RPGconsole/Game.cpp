@@ -44,8 +44,8 @@ void Game::NewPlayerCharacter() {
 }
 
 Wave<Enemy> Game::FirstWaveCreator() {
-    std::unique_ptr<Enemy> gob1 = std::make_unique<Enemy>("gobelin", 10 , 5, 0);
-    std::unique_ptr<Enemy> orc1= std::make_unique<Enemy>("Orc", 50 , 10, 0);
+    std::unique_ptr<Enemy> gob1 = std::make_unique<Enemy>("gobelin", 10 , 5, 0,10);
+    std::unique_ptr<Enemy> orc1= std::make_unique<Enemy>("Orc", 50 , 10, 0, 50);
     std::vector<Enemy> enemies = std::vector<Enemy>();
     enemies.push_back(*gob1);
     enemies.push_back(*orc1);
@@ -56,9 +56,9 @@ Wave<Enemy> Game::FirstWaveCreator() {
 }
 
 Wave<Enemy> Game::SecondWaveCreator() {
-    std::shared_ptr<Enemy> orc2 = std::make_shared<Enemy>("Guerrier orc", 10 , 5, 0);
-    std::shared_ptr<Enemy> orc3= std::make_shared<Enemy>("Guerrier orc", 50 , 10, 0);
-    std::shared_ptr<Enemy> chiefOrc= std::make_shared<Enemy>("Chef orc", 50 , 10, 0);
+    std::shared_ptr<Enemy> orc2 = std::make_shared<Enemy>("Guerrier orc", 10 , 10, 0, 50);
+    std::shared_ptr<Enemy> orc3= std::make_shared<Enemy>("Guerrier orc", 50 , 10, 0, 50);
+    std::shared_ptr<Enemy> chiefOrc= std::make_shared<Enemy>("Chef orc", 50 , 20, 10, 200);
     std::vector<Enemy> enemies = std::vector<Enemy>();
     enemies.push_back(*orc2);
     enemies.push_back(*orc3);
@@ -123,7 +123,7 @@ void Game::Battle(const int id, Player &player) {
         std::cout << "[4] utiliser un objet" << std::endl;
         std:: cin >> input;
         if (input == 1) {
-            wave.WTakeDamage(player.GetPower());
+            wave.WTakeDamageFromPlayer(player.GetPower(), player);
             player.TakeDamage(wave.GetWavePower());
             player.Display();
             std::cout << std::endl;
