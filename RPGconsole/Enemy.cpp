@@ -10,7 +10,7 @@ Enemy::Enemy(const std::string &characterName, const int hPMax, const int power,
 
 Enemy::~Enemy() = default;
 
-void Enemy::TakeDamage(int &damage, const std::shared_ptr<Character> &character) {
+void Enemy::TakeDamage(int &damage) {
     damage -= _armor;
     _characterHP -= damage;
     if (_characterHP <= 0) {

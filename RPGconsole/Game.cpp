@@ -102,13 +102,13 @@ void Game::Battle(const int id, Player &player) {
     std::cout << "-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-"<< std::endl;
     if (id == 1) {
         wave = FirstWaveCreator();
-        player->Display();
+        player.Display();
         wave.DisplayWave();
         std::cout << "-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-"<< std::endl;
     }
     else if(id == 2) {
         wave = SecondWaveCreator();
-        player->Display();
+        player.Display();
         wave.DisplayWave();
         std::cout << "-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-"<< std::endl;
     }
@@ -116,15 +116,14 @@ void Game::Battle(const int id, Player &player) {
          std::cout << "Commande incorrect" << std::endl;
     }
     while ( !wave.IsCompleted()) {
-        if (player->IsDead())break;
+        if (player.IsDead())break;
         std::cout << "[1] attack" << std::endl;
         std::cout << "[2] passer" << std::endl;
         std::cout << "[3] fuir" << std::endl;
         std::cout << "[4] utiliser un objet" << std::endl;
         std:: cin >> input;
         if (input == 1) {
-            std::shared_ptr<Player> playerpt = std::make_shared<Player>();
-            wave.WTakeDamage(player->GetPower(),player);
+            wave.WTakeDamage(player.GetPower());
             player.TakeDamage(wave.GetWavePower());
             player.Display();
             std::cout << std::endl;

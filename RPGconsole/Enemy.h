@@ -12,6 +12,6 @@ class Enemy:public Character{
     public:
     Enemy(const std::string &characterName, int hPMax, int power, int armor);
     ~Enemy() override;
-    void TakeDamage(int &damage, const std::shared_ptr<Character> &character);
+    void TakeDamage(int &damage);
 
 };

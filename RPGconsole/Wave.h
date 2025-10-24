@@ -24,11 +24,11 @@ public:
         }
     }
 
-    void WTakeDamage(int damage,  const std::shared_ptr<Character> &character){
+    void WTakeDamage(int damage){
         if(!_enemyList.empty()) {
             for (int i = 0; i < _enemyList.size(); i++) {
                 if (!_enemyList[i]->IsDead()) {
-                    _enemyList[i]->TakeDamage(damage, character);
+                    _enemyList[i]->TakeDamage(damage);
                     return;
                 }
             }

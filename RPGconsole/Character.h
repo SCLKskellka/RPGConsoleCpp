@@ -5,8 +5,6 @@
 #pragma once
 #include <iostream>
 
-#include "Player.h"
-
 class Character {
 public:
     Character(std::string characterName, int hPMax, int power, int armor);
