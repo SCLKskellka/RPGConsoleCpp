@@ -14,6 +14,7 @@ class Player : public Character {
 public:
     Player(const std::string &characterName, int hPMax, int power, int armor);
     ~Player() override;
+    void Display() override;
     void LootItem(const std::shared_ptr<Item> &item);// smart pointeur en const pour permettre le polymorphism
     void DropItem(const std::shared_ptr<Item> &item);// smart pointeur en const pour permettre le polymorphism
     void DisplayInventory();

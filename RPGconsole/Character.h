@@ -9,7 +9,7 @@ class Character {
 public:
     Character(std::string characterName, int hPMax, int power, int armor);
     virtual ~Character();
-    void Display();
+    virtual void Display();
     void TakeDamage(int damage);
     void Healing(int healAmount);
     void Attack(Character target) const;

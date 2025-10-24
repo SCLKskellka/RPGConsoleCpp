@@ -12,6 +12,14 @@ Player::Player(const std::string &characterName, const int hPMax, const int powe
 
 Player::~Player() = default;
 
+void Player::Display() {
+    std::cout << "[[ "<< _characterName << "Lvl - " << _lvl << " ]]" << std::endl;
+    std::cout << ">> HP: "<< _characterHP << "/" << _characterHPMax << std::endl;
+    std::cout << ">> XP: "<< _xp << "/" << _maxXP << std::endl;
+    std::cout << "<Power> "<< _power << std::endl;
+    std::cout << "<Armor> "<< _armor << std::endl;
+}
+
 void Player::LootItem(const std::shared_ptr<Item> &item) {
     _playerInventory->AddItem(item);
 }

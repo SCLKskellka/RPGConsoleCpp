@@ -4,9 +4,10 @@
 
 #include "Enemy.h"
 
-Enemy::Enemy(const std::string &characterName, const int hPMax, const int power, const int armor, int growValue)
+Enemy::Enemy(const std::string &characterName, const int hPMax, const int power, const int armor, int growValue, int lvl)
     : Character( characterName,hPMax, power, armor) {
     _growValue = growValue;
+    _lvl = lvl;
 }
 
 Enemy::~Enemy() = default;

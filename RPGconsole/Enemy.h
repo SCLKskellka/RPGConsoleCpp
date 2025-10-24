@@ -11,7 +11,7 @@
 
 class Enemy:public Character{
     public:
-    Enemy(const std::string &characterName, int hPMax, int power, int armor, int growValue);
+    Enemy(const std::string &characterName, int hPMax, int power, int armor, int growValue, int lvl);
     ~Enemy() override;
     void TakeDamageFromPlayer(int &damage, Player &player);
     void SetGrowValue(int &growValue);
