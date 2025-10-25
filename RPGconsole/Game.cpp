@@ -28,7 +28,8 @@ void Game::Menu() {
         std::cout << "MERCI !" << std::endl;
     }
     else {
-        std::cout << "Commande incorrect" << std::endl;
+        std::cout << "Commande incorrect" << std::endl ;
+        std::cout << std::endl << std::endl << std::endl;
         Menu();
     }
 }
@@ -44,8 +45,8 @@ void Game::NewPlayerCharacter() {
 }
 
 Wave<Enemy> Game::FirstWaveCreator() {
-    std::unique_ptr<Enemy> gob1 = std::make_unique<Enemy>("gobelin", 10 , 5, 0,10,1);
-    std::unique_ptr<Enemy> orc1= std::make_unique<Enemy>("Orc", 50 , 10, 0, 50, 10);
+    std::unique_ptr<Enemy> gob1 = std::make_unique<Enemy>("Gobelin", 10 , 5, 0,10,1);
+    std::unique_ptr<Enemy> orc1= std::make_unique<Enemy>("Guerrier gobelin", 50 , 10, 1, 40, 5);
     std::vector<Enemy> enemies = std::vector<Enemy>();
     enemies.push_back(*gob1);
     enemies.push_back(*orc1);
@@ -56,9 +57,9 @@ Wave<Enemy> Game::FirstWaveCreator() {
 }
 
 Wave<Enemy> Game::SecondWaveCreator() {
-    std::shared_ptr<Enemy> orc2 = std::make_shared<Enemy>("Guerrier orc", 10 , 10, 0, 50, 10);
-    std::shared_ptr<Enemy> orc3= std::make_shared<Enemy>("Guerrier orc", 50 , 10, 0, 50, 10);
-    std::shared_ptr<Enemy> chiefOrc= std::make_shared<Enemy>("Chef orc", 1000 , 50, 10, 200, 20);
+    std::shared_ptr<Enemy> orc2 = std::make_shared<Enemy>("Guerrier orc", 100 , 20, 5, 80, 10);
+    std::shared_ptr<Enemy> orc3 = std::make_shared<Enemy>("Guerrier orc", 100 , 20, 5, 80, 10);
+    std::shared_ptr<Enemy> chiefOrc = std::make_shared<Enemy>("Chef orc", 1000 , 80, 20, 500, 20);
     std::vector<Enemy> enemies = std::vector<Enemy>();
     enemies.push_back(*orc2);
     enemies.push_back(*orc3);
@@ -121,7 +122,9 @@ void Game::Battle(const int id, Player &player) {
         std::cout << "[2] passer" << std::endl;
         std::cout << "[3] fuir" << std::endl;
         std::cout << "[4] utiliser un objet" << std::endl;
+
         std:: cin >> input;
+
         if (input == 1) {
             wave.WTakeDamageFromPlayer(player.GetPower(), player);
             player.TakeDamage(wave.GetWavePower());
@@ -143,27 +146,12 @@ void Game::Battle(const int id, Player &player) {
             Adventure(player);
         }
         else if(input == 4) {
-            std::cout << "-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-"<< std::endl;
-            player.DisplayInventory();
-            std::cout << "Selectionnez votre objet"<< std::endl;
-            std::cout << "[999] retour au choix precedent"<< std::endl;
-            std::cin >> input;
-            std::cout << "-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-"<< std::endl;
-            if(input < player.GetInventorySize() ) {
-                player.UseItem(input);
-            }
-            else if(input == 999 ) {
-                Battle(id, player);
-            }
-            else {
-                std::cout << "commande incorrect" << std::endl;
-                std::cout << "[1] attack" << std::endl;
-                std:: cin >> input;
-            }
+            Inventory(id, player);
         }
         else {
             std::cout << "commande incorrect" << std::endl;
             std::cout << "[1] attack" << std::endl;
+
             std:: cin >> input;
         }
     }
@@ -177,5 +165,29 @@ void Game::Battle(const int id, Player &player) {
         player.LootItem(potion);
         std::cout << "= Vous obtenez une potion ! =" << std::endl;
         Adventure(player);
+    }
+}
+
+void Game::Inventory(const int &id,Player &player) {
+    int input;
+
+    std::cout << "-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-"<< std::endl;
+    player.DisplayInventory();
+    std::cout << "Selectionnez votre objet"<< std::endl;
+    std::cout << "[999] retour au choix precedent"<< std::endl;
+
+    std::cin >> input;
+
+    std::cout << "-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-"<< std::endl;
+    if(input < player.GetInventorySize() ) {
+        player.UseItem(input);
+    }
+    else if(input == 999 ) {
+        Battle(id, player);
+    }
+    else {
+        std::cout << "commande incorrect" << std::endl << std::endl;
+
+        Inventory(id, player);
     }
 }

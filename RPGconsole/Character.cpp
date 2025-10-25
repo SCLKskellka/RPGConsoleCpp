@@ -18,7 +18,7 @@ Character::Character(std::string characterName,const int hPMax, const int power,
 Character::~Character() = default;
 
 void Character::Display() {
-    std::cout << "[[ "<< _characterName << " ]]" << std::endl;
+    std::cout << "{| "<< _characterName << "  [Lvl-" << _lvl << "] |}" << std::endl;
     std::cout << ">> HP: "<< _characterHP << "/" << _characterHPMax << std::endl;
     std::cout << "<Power> "<< _power << std::endl;
     std::cout << "<Armor> "<< _armor << std::endl;
@@ -33,12 +33,16 @@ void Character::TakeDamage(int damage) {
     damage -= _armor;
     _characterHP -= damage;
     if (_characterHP <= 0) {
+        _characterHP = 0;
         _isDead = true;
     }
 }
 
 void Character::Healing(int healAmount) {
     _characterHP += healAmount;
+    if (_characterHP > _characterHPMax) {
+        _characterHP = _characterHPMax;
+    }
 }
 
 bool Character::IsDead() const {
@@ -51,9 +55,10 @@ void Character::Growth(int growAmount) {
     _xp += growAmount;
     while (_xp >= _maxXP){
         _lvl += 1;
-        _power += 2;
-        _characterHPMax += 50;
-        _characterHP += 50;
+        _power += 3;
+        _armor += 1;
+        _characterHPMax += 5;
+        _characterHP += 5;
         _xp-=_maxXP;
     }
 }

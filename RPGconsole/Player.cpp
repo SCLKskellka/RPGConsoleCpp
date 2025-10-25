@@ -13,7 +13,7 @@ Player::Player(const std::string &characterName, const int hPMax, const int powe
 Player::~Player() = default;
 
 void Player::Display() {
-    std::cout << "[[ "<< _characterName << "Lvl - " << _lvl << " ]]" << std::endl;
+    std::cout << "{| "<< _characterName << "  [Lvl-" << _lvl << "] |}" << std::endl;
     std::cout << ">> HP: "<< _characterHP << "/" << _characterHPMax << std::endl;
     std::cout << ">> XP: "<< _xp << "/" << _maxXP << std::endl;
     std::cout << "<Power> "<< _power << std::endl;
@@ -36,7 +36,9 @@ int Player::GetInventorySize() {
     return _playerInventory->GetInventorySize();
 }
 void Player::UseItem(int position) {
-    _playerInventory->GetItem(position)->Effect(std::shared_ptr<Player>(this));
+    std::cout<< "used" << std::endl;
+    _playerInventory->GetItem(position)->Effect( std::shared_ptr<Player>(this));
+    //std::cout<< "used" << std::endl;
     DropItem(_playerInventory->GetItem(position));
 }
 
