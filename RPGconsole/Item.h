@@ -16,7 +16,7 @@ public:
     Item(std::string name);
     virtual ~Item() = default;
     std::string GetName();
-    virtual void Effect(const std::shared_ptr<Character> &character);// smart pointeur en const pour permettre le polymorphism
+    virtual void Effect(Player &player);// smart pointeur en const pour permettre le polymorphism
 
 protected:
     std::string _itemName;

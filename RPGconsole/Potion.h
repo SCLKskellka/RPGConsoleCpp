@@ -14,8 +14,8 @@ class Potion : public Item {
         _healAmount = healAmount;
     }
 
-    ~Potion() = default;
-    void Effect(const std::shared_ptr<Character> &player) override;
+    ~Potion() override = default;
+    void Effect(Player &player) override;
     private:
     int _healAmount;
 };

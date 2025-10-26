@@ -19,7 +19,7 @@ public:
     void DropItem(const std::shared_ptr<Item> &item);// smart pointeur en const pour permettre le polymorphism
     void DisplayInventory();
     int GetInventorySize();
-    void UseItem(int position);
+    void UseItem(int position, Player &player);
 private:
     std::unique_ptr<Inventory> _playerInventory;
 };

@@ -18,10 +18,12 @@ Character::Character(std::string characterName,const int hPMax, const int power,
 Character::~Character() = default;
 
 void Character::Display() {
+    std::cout << std::endl<< std::endl;
     std::cout << "{| "<< _characterName << "  [Lvl-" << _lvl << "] |}" << std::endl;
     std::cout << ">> HP: "<< _characterHP << "/" << _characterHPMax << std::endl;
     std::cout << "<Power> "<< _power << std::endl;
     std::cout << "<Armor> "<< _armor << std::endl;
+    std::cout << std::endl<< std::endl;
 }
 
 

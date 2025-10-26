@@ -21,6 +21,11 @@ void Game::Menu() {
     //
 
     std::cin >> input;
+
+    std::cout << "-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-"<< std::endl;
+    std::cout << std::endl << std::endl;
+    std::cout << "-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-"<< std::endl;
+
     if(input == "1") {
         NewPlayerCharacter();
     }
@@ -38,9 +43,16 @@ void Game::NewPlayerCharacter() {
     std::string name;
 
     std::cout << ">>> Creation du personnage du joueur : " << std::endl << "Nom ? ";
+
     std::cin >> name;
+
+    std::cout << "-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-"<< std::endl;
+    std::cout << std::endl << std::endl;
+    std::cout << "-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-"<< std::endl;
+
     Player player = Player (name, 100, 10, 5) ;
     player.Display();
+
     Adventure(player);
 }
 
@@ -81,6 +93,10 @@ void Game::Adventure(Player &player) {
 
     std::cin >> input;
 
+    std::cout << "-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-"<< std::endl;
+    std::cout << std::endl << std::endl;
+    std::cout << "-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-"<< std::endl;
+
     if(input == "1") {
         Battle(1, player);
     }
@@ -100,18 +116,15 @@ void Game::Battle(const int id, Player &player) {
     int input;
     Wave<Enemy> wave;
 
-    std::cout << "-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-"<< std::endl;
     if (id == 1) {
         wave = FirstWaveCreator();
         player.Display();
         wave.DisplayWave();
-        std::cout << "-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-"<< std::endl;
     }
     else if(id == 2) {
         wave = SecondWaveCreator();
         player.Display();
         wave.DisplayWave();
-        std::cout << "-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-"<< std::endl;
     }
      else{
          std::cout << "Commande incorrect" << std::endl;
@@ -125,34 +138,32 @@ void Game::Battle(const int id, Player &player) {
 
         std:: cin >> input;
 
+        std::cout << "-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-"<< std::endl;
+        std::cout << std::endl << std::endl;
+        std::cout << "-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-"<< std::endl;
+
         if (input == 1) {
             wave.WTakeDamageFromPlayer(player.GetPower(), player);
             player.TakeDamage(wave.GetWavePower());
             player.Display();
             std::cout << std::endl;
             wave.DisplayWave();
-            std::cout << "-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-"<< std::endl;
         }
         else if(input == 2) {
             player.TakeDamage(wave.GetWavePower());
             player.Display();
             wave.DisplayWave();
-            std::cout << "-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-"<< std::endl;
         }
         else if(input == 3) {
-            std::cout << "-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-"<< std::endl;
-            std::cout << "Vous prenez la fuite"<< std::endl;
-            std::cout << "-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-" << std::endl << std::endl;
+            std::cout << ">>>>> Vous prenez la fuite >>>>>"<< std::endl;
             Adventure(player);
         }
         else if(input == 4) {
-            Inventory(id, player);
+            Inventory(id, player, wave);
         }
         else {
             std::cout << "commande incorrect" << std::endl;
-            std::cout << "[1] attack" << std::endl;
-
-            std:: cin >> input;
+            Battle(id, player);
         }
     }
     if(player.IsDead()) {
@@ -168,10 +179,9 @@ void Game::Battle(const int id, Player &player) {
     }
 }
 
-void Game::Inventory(const int &id,Player &player) {
+void Game::Inventory(const int &id,Player &player, Wave<Enemy> &wave) {
     int input;
 
-    std::cout << "-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-"<< std::endl;
     player.DisplayInventory();
     std::cout << "Selectionnez votre objet"<< std::endl;
     std::cout << "[999] retour au choix precedent"<< std::endl;
@@ -179,15 +189,19 @@ void Game::Inventory(const int &id,Player &player) {
     std::cin >> input;
 
     std::cout << "-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-"<< std::endl;
+    std::cout << std::endl << std::endl;
+    std::cout << "-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-"<< std::endl;
+
     if(input < player.GetInventorySize() ) {
-        player.UseItem(input);
+        player.UseItem(input, player);
+        player.Display();
+        wave.DisplayWave();
     }
     else if(input == 999 ) {
         Battle(id, player);
     }
     else {
         std::cout << "commande incorrect" << std::endl << std::endl;
-
-        Inventory(id, player);
+        Inventory(id, player, wave);
     }
 }

@@ -4,7 +4,7 @@
 
 #include "Potion.h"
 #include "Player.h"
-void Potion::Effect(const std::shared_ptr<Character> &player) {
-    player->Healing(15);
+void Potion::Effect(Player &player) {
+    player.Healing(15);
 }
 

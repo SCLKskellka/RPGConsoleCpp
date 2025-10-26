@@ -19,5 +19,5 @@ public:
     Wave<Enemy> SecondWaveCreator();
     void Adventure(Player &player);
     void Battle(int id, Player &player);
-    void Inventory(const int &id,Player &player);
+    void Inventory(const int &id, Player &player, Wave<Enemy> &wave);
 };

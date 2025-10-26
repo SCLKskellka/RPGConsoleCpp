@@ -15,6 +15,6 @@ std::string Item::GetName() {
     return _itemName;
 }
 
-void Item::Effect(const std::shared_ptr<Character> &character) {
-    std::cout << "Effect: player is dead = "  << character->IsDead() << "\n";
+void Item::Effect(Player &player) {
+    std::cout << "Nothing "  << player.IsDead() << "\n";
 }
